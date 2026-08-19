@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import books from '../../../data/books'
 import BookActions from '../../components/BookActions'
+import CoverImage from '../../components/CoverImage'
 
 export async function generateStaticParams() {
   return books.map((book) => ({
@@ -60,10 +61,12 @@ export default function BookPage({ params }) {
             <div className="relative">
               <div className="sticky top-8">
                 <div className="relative aspect-[2/3] max-w-md mx-auto lg:mx-0 rounded-2xl overflow-hidden shadow-2xl">
-                  <img
+                  <CoverImage
+                    slug={book.slug}
                     src={book.coverPng}
                     alt={book.title}
                     className="w-full h-full object-cover"
+                    priority
                   />
                 </div>
               </div>

@@ -4,7 +4,9 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useAuth } from '../../context/AuthContext'
+import { useCovers } from '../../context/CoverContext'
 import books from '../../../data/books'
+import CoverImage from '../../components/CoverImage'
 
 export default function SuccessPageClient() {
   const params = useParams()
@@ -67,7 +69,8 @@ export default function SuccessPageClient() {
         <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-8 mb-8">
           <div className="flex items-center gap-4 mb-6">
             <div className="relative w-16 h-24 rounded-lg overflow-hidden shadow-md flex-shrink-0">
-              <img
+              <CoverImage
+                slug={book.slug}
                 src={book.coverPng}
                 alt={book.title}
                 className="w-full h-full object-cover"

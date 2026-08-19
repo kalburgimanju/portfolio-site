@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import books from '../data/books'
+import CoverImage from './components/CoverImage'
 
 export const metadata = {
   title: 'Manjunath Kalburgi — Author & Innovator',
@@ -82,7 +83,8 @@ export default function Home() {
             {featuredBooks.map((book) => (
               <Link key={book.slug} href={`/books/${book.slug}`} className="book-card group">
                 <div className="relative aspect-[2/3] overflow-hidden bg-slate-100">
-                  <img
+                  <CoverImage
+                    slug={book.slug}
                     src={book.coverPng}
                     alt={book.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -128,7 +130,8 @@ export default function Home() {
             {allBooks.map((book) => (
               <Link key={book.slug} href={`/books/${book.slug}`} className="book-card group">
                 <div className="relative aspect-[2/3] overflow-hidden bg-slate-100">
-                  <img
+                  <CoverImage
+                    slug={book.slug}
                     src={book.coverPng}
                     alt={book.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"

@@ -3,13 +3,16 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useAuth } from '../context/AuthContext'
+import { useCovers } from '../context/CoverContext'
 import books from '../../data/books'
 
 export default function AdminPage() {
   const { user, loading } = useAuth()
+  const { setCover, getCover, removeCover } = useCovers()
   const [purchases, setPurchases] = useState([])
   const [selectedBook, setSelectedBook] = useState(null)
   const [editorContent, setEditorContent] = useState('')
+  const [editorCoverPreview, setEditorCoverPreview] = useState('')
   const [message, setMessage] = useState('')
   const [activeTab, setActiveTab] = useState('overview')
 
@@ -31,12 +34,28 @@ export default function AdminPage() {
   const openEditor = (book) => {
     setSelectedBook(book)
     setEditorContent(`# ${book.title}\n\nAdd your updated content here.`)
+    const existingCover = getCover(book.slug)
+    setEditorCoverPreview(existingCover || '')
     setMessage('')
+  }
+
+  const handleCoverChange = (e) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    const reader = new FileReader()
+    reader.onload = (event) => {
+      setEditorCoverPreview(event.target.result)
+    }
+    reader.readAsDataURL(file)
   }
 
   const saveBookUpdate = () => {
     if (!selectedBook) return
-    setMessage('Book updated successfully! (demo)')
+    if (editorCoverPreview) {
+      setCover(selectedBook.slug, editorCoverPreview)
+    }
+    setMessage('Book updated successfully!')
     setTimeout(() => setMessage(''), 3000)
   }
 
@@ -153,7 +172,8 @@ export default function AdminPage() {
                 <div key={book.slug} className="px-6 py-4 flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-16 rounded-lg overflow-hidden bg-slate-100 flex-shrink-0">
-                      <img
+                      <CoverImage
+                        slug={book.slug}
                         src={book.coverPng}
                         alt={book.title}
                         className="w-full h-full object-cover"
@@ -257,11 +277,28 @@ export default function AdminPage() {
                   <input
                     type="file"
                     accept="image/*"
-                    onChange={(e) => setEditorCover(e.target.files?.[0]?.name || '')}
+                    onChange={handleCoverChange}
                     className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 text-sm"
                   />
-                  {editorCover && (
-                    <p className="text-sm text-slate-500 mt-1">Selected: {editorCover}</p>
+                  {editorCoverPreview && (
+                    <div className="mt-3">
+                      <p className="text-sm text-slate-500 mb-2">Preview:</p>
+                      <img
+                        src={editorCoverPreview}
+                        alt="Cover preview"
+                        className="w-32 h-48 object-cover rounded-lg shadow-md"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setEditorCoverPreview('')
+                          if (selectedBook) removeCover(selectedBook.slug)
+                        }}
+                        className="mt-2 text-sm text-red-600 hover:text-red-700"
+                      >
+                        Remove Cover
+                      </button>
+                    </div>
                   )}
                 </div>
                 <div className="flex gap-3">
