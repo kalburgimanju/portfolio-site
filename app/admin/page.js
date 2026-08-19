@@ -81,7 +81,7 @@ export default function AdminPage() {
     setReaderLoading(true)
 
     try {
-      const res = await fetch(`/content/${book.slug}/content.md`)
+      const res = await fetch(`/portfolio-site/content/${book.slug}/content.md`)
       if (!res.ok) throw new Error('Content not found')
       const text = await res.text()
       setReaderContent(text)
