@@ -17,6 +17,9 @@ export default function AdminPage() {
   const [editorCoverPreview, setEditorCoverPreview] = useState('')
   const [message, setMessage] = useState('')
   const [activeTab, setActiveTab] = useState('overview')
+  const [readingBook, setReadingBook] = useState(null)
+  const [readerContent, setReaderContent] = useState('')
+  const [readerLoading, setReaderLoading] = useState(false)
 
   useEffect(() => {
     if (!user || user.role !== 'admin') return
@@ -70,6 +73,28 @@ export default function AdminPage() {
     }
     setMessage('Book updated successfully!')
     setTimeout(() => setMessage(''), 3000)
+  }
+
+  const openReader = async (book) => {
+    setReadingBook(book)
+    setReaderContent('')
+    setReaderLoading(true)
+
+    try {
+      const res = await fetch(`/content/${book.slug}/content.md`)
+      if (!res.ok) throw new Error('Content not found')
+      const text = await res.text()
+      setReaderContent(text)
+    } catch (e) {
+      setReaderContent(`# ${book.title}\n\nContent not available.`)
+    } finally {
+      setReaderLoading(false)
+    }
+  }
+
+  const closeReader = () => {
+    setReadingBook(null)
+    setReaderContent('')
   }
 
   if (loading) {
@@ -212,6 +237,12 @@ export default function AdminPage() {
                     >
                       Edit / Upload
                     </button>
+                    <button
+                      onClick={() => openReader(book)}
+                      className="text-sm px-3 py-1.5 rounded-lg bg-slate-900 text-white hover:bg-slate-800"
+                    >
+                      Read Full Book
+                    </button>
                     <Link
                       href={`/books/${book.slug}`}
                       className="text-sm px-3 py-1.5 rounded-lg bg-slate-50 text-slate-700 hover:bg-slate-100"
@@ -337,6 +368,33 @@ export default function AdminPage() {
                     Cancel
                   </button>
                 </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {readingBook && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+            <div className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-hidden flex flex-col">
+              <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between flex-shrink-0">
+                <h3 className="text-lg font-bold text-slate-900">Reading: {readingBook.title}</h3>
+                <button
+                  onClick={closeReader}
+                  className="text-slate-500 hover:text-slate-700"
+                >
+                  ✕
+                </button>
+              </div>
+              <div className="overflow-y-auto p-6">
+                {readerLoading ? (
+                  <div className="text-slate-600">Loading book content...</div>
+                ) : (
+                  <div className="prose prose-slate max-w-none">
+                    <pre className="whitespace-pre-wrap text-slate-700 leading-relaxed font-sans">
+                      {readerContent}
+                    </pre>
+                  </div>
+                )}
               </div>
             </div>
           </div>
