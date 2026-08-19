@@ -26,7 +26,12 @@ Personal branding portfolio and ebook storefront built with **Next.js 14** and *
 
 ## Local Development
 
+**Important:** Do not run `npm run build` inside Google Drive's mounted folder. Webpack can hit `ETIMEDOUT` reading files from cloud storage. Clone or copy the repo to a local path first.
+
 ```bash
+# Recommended local path outside Google Drive
+git clone https://github.com/kalburgimanju/portfolio-site.git ~/portfolio-site
+cd ~/portfolio-site
 npm install
 npm run dev
 ```
