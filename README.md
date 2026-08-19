@@ -65,10 +65,16 @@ This refreshes `data/books.js` and copies new covers into `public/covers/`.
 
 Use **Payment Links** — no backend or secret key needed.
 
-1. Create a product in Stripe Dashboard for each book
-2. Create a **Payment Link** for that product
-3. Optionally set **Post-payment redirect** to `/portfolio-site/success/<slug>` for automatic redirect after payment
-4. Paste the payment link URL into `stripeLink` in `data/books.js`
+1. Run `node scripts/stripe-setup.js` to generate `docs/stripe-setup-checklist.md`
+2. For each book in the checklist, go to Stripe Dashboard → Products → Add product
+3. Enter the book title and set the price
+4. Enable one-time payment
+5. Create a **Payment Link**
+6. Copy the payment link URL and paste it into `stripeLink` in `data/books.js`
+7. Optional: set post-payment redirect to `https://kalburgimanju.github.io/portfolio-site/success/<slug>`
+8. After updating links, run `npm run build` and push to deploy
+
+**Note:** Keep your Stripe secret key private. This site uses Payment Links so no server-side code or secret keys are required.
 
 ## Google Drive Setup
 
