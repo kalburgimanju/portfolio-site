@@ -2,9 +2,11 @@
 
 import Link from 'next/link'
 import { useAuth } from '../context/AuthContext'
+import { useCart } from '../context/CartContext'
 
 export default function NavBar() {
   const { user, logout } = useAuth()
+  const { cartCount } = useCart()
 
   return (
     <header className="bg-white border-b border-slate-200 sticky top-0 z-40">
@@ -15,6 +17,14 @@ export default function NavBar() {
         <nav className="flex items-center gap-4">
           <Link href="/#books" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">
             Books
+          </Link>
+          <Link href="/cart" className="relative text-sm text-slate-600 hover:text-slate-900 transition-colors">
+            Cart
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-3 bg-brand-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
+                {cartCount}
+              </span>
+            )}
           </Link>
           {user ? (
             <>
