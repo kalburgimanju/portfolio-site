@@ -4,12 +4,14 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useAuth } from '../context/AuthContext'
 import { useCovers } from '../context/CoverContext'
-import books from '../../data/books'
+import CoverImage from '../components/CoverImage'
 
 export default function AdminPage() {
   const { user, loading } = useAuth()
   const { setCover, getCover, removeCover } = useCovers()
   const [purchases, setPurchases] = useState([])
+  const [books, setBooks] = useState([])
+  const [booksError, setBooksError] = useState('')
   const [selectedBook, setSelectedBook] = useState(null)
   const [editorContent, setEditorContent] = useState('')
   const [editorCoverPreview, setEditorCoverPreview] = useState('')
@@ -20,6 +22,17 @@ export default function AdminPage() {
     if (!user || user.role !== 'admin') return
     const all = JSON.parse(localStorage.getItem('portfolio_purchases') || '[]')
     setPurchases(all)
+
+    try {
+      const mod = require('../../data/books')
+      const raw = mod.default || mod
+      const list = Array.isArray(raw) ? raw : []
+      setBooks(list)
+      setBooksError('')
+    } catch (e) {
+      console.error('Failed to load books', e)
+      setBooksError('Unable to load books right now.')
+    }
   }, [user])
 
   const totalRevenue = purchases.reduce((sum, p) => sum + (p.price || 0), 0)
@@ -104,6 +117,12 @@ export default function AdminPage() {
         {message && (
           <div className="mb-6 bg-green-50 text-green-700 text-sm rounded-lg px-4 py-3">
             {message}
+          </div>
+        )}
+
+        {booksError && (
+          <div className="mb-6 bg-red-50 text-red-700 text-sm rounded-lg px-4 py-3">
+            {booksError}
           </div>
         )}
 
