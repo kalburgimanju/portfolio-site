@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import books from '../../../data/books'
@@ -60,13 +59,10 @@ export default function BookPage({ params }) {
             <div className="relative">
               <div className="sticky top-8">
                 <div className="relative aspect-[2/3] max-w-md mx-auto lg:mx-0 rounded-2xl overflow-hidden shadow-2xl">
-                  <Image
+                  <img
                     src={book.coverPng}
                     alt={book.title}
-                    fill
-                    priority
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="w-full h-full object-cover"
                   />
                 </div>
               </div>

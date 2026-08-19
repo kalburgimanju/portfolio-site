@@ -2,8 +2,8 @@
 
 Personal branding portfolio and ebook storefront built with **Next.js 14** and **Tailwind CSS**. Each book gets its own marketing page, and buyers are routed through **Stripe** to a success page that shares the **Google Drive PDF download link**.
 
-- Live site: `https://<your-username>.github.io/portfolio-site/`
-- Repo: `https://github.com/<your-username>/portfolio-site`
+- Live site: `https://kalburgimanju.github.io/portfolio-site/`
+- Repo: `https://github.com/kalburgimanju/portfolio-site`
 
 ## Features
 
@@ -12,6 +12,10 @@ Personal branding portfolio and ebook storefront built with **Next.js 14** and *
 - Order success page (`/success/[slug]`) showing the PDF download link
 - Auto-generated book catalog from `ebook-generator/projects`
 - GitHub Pages deployment via GitHub Actions
+
+## Security Note
+
+**Do not commit Stripe secret keys to this repository.** This site is designed to work without backend code by using Stripe Payment Links. Keep your secret key only in Stripe Dashboard or a private server-side integration.
 
 ## Local Development
 
@@ -24,10 +28,10 @@ Open `http://localhost:3000`.
 
 ## Configure a Book for Sale
 
-Edit `data/books.js`. For each book, fill in:
+Edit `data/books.js`. For each book you want to sell, fill in:
 
 - `price` — sale price in USD
-- `stripeLink` — your Stripe Payment Link URL
+- `stripeLink` — Stripe Payment Link URL
 - `driveLink` — Google Drive share link to the PDF
 
 Example:
@@ -38,7 +42,7 @@ Example:
   "title": "Learning AI Agents in 10 Days",
   "author": "Manjunath Kalburgi",
   "hasPdf": true,
-  "coverPng": "/covers/learning-ai-agents-in-10-days/cover.png",
+  "coverPng": "/portfolio-site/covers/learning-ai-agents-in-10-days/cover.png",
   "price": 9.99,
   "currency": "USD",
   "stripeLink": "https://buy.stripe.com/...",
@@ -59,10 +63,12 @@ This refreshes `data/books.js` and copies new covers into `public/covers/`.
 
 ## Stripe Setup
 
-1. Create a product in Stripe for each book
-2. Use **Payment Links** (recommended for static sites)
-3. Paste the payment link into `stripeLink` in `data/books.js`
-4. Enable the Stripe webhook to send customers to `/success/[slug]` after payment
+Use **Payment Links** — no backend or secret key needed.
+
+1. Create a product in Stripe Dashboard for each book
+2. Create a **Payment Link** for that product
+3. Optionally set **Post-payment redirect** to `/portfolio-site/success/<slug>` for automatic redirect after payment
+4. Paste the payment link URL into `stripeLink` in `data/books.js`
 
 ## Google Drive Setup
 
@@ -85,20 +91,21 @@ To enable GitHub Pages:
 ```
 portfolio-site/
 ├── app/
-│   ├── books/[slug]/page.js    # Individual book page
-│   ├── success/[slug]/page.js  # Order success / download page
-│   ├── layout.js               # Root layout + metadata
-│   ├── page.js                 # Homepage
-│   └── globals.css             # Tailwind + custom styles
+│   ├── about/page.js             # About the author
+│   ├── books/[slug]/page.js      # Individual book page
+│   ├── success/[slug]/page.js    # Order success / download page
+│   ├── layout.js                 # Root layout + metadata
+│   ├── page.js                   # Homepage
+│   └── globals.css               # Tailwind + custom styles
 ├── data/
-│   └── books.js                # Auto-generated book catalog
+│   └── books.js                  # Auto-generated book catalog
 ├── public/
-│   └── covers/                 # Book cover images
+│   └── covers/                   # Book cover images
 ├── scripts/
-│   ├── extract-books.js        # Generate books.js from ebook-generator
-│   └── copy-covers.js          # Copy covers to public/
-├── next.config.js              # Static export config
-├── tailwind.config.js          # Tailwind theme
+│   ├── extract-books.js          # Generate books.js from ebook-generator
+│   └── copy-covers.js            # Copy covers to public/
+├── next.config.js                # Static export config
+├── tailwind.config.js            # Tailwind theme
 └── package.json
 ```
 

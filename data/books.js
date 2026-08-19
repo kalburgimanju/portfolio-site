@@ -19,7 +19,7 @@ module.exports = [
       "Scaling and Sustaining Your AI Business"
     ],
     "hasPdf": true,
-    "coverPng": "/covers/100-startup-business-ideas/cover.png",
+    "coverPng": "/portfolio-site/covers/100-startup-business-ideas/cover.png",
     "price": 9.99,
     "currency": "USD",
     "stripeLink": "",
@@ -42,7 +42,7 @@ module.exports = [
       "Monetization, Scaling, and Maintenance — Strategies for Packaging and Selling Your AI Agents as a Service, Managing API Costs, and Scaling Your Systems for Long-Term Profitability"
     ],
     "hasPdf": true,
-    "coverPng": "/covers/building-10-profitable-ai-agents/cover.png",
+    "coverPng": "/portfolio-site/covers/building-10-profitable-ai-agents/cover.png",
     "price": 9.99,
     "currency": "USD",
     "stripeLink": "",
@@ -65,7 +65,7 @@ module.exports = [
       "Case Studies and Future Trends"
     ],
     "hasPdf": true,
-    "coverPng": "/covers/building-agent-loop/cover.png",
+    "coverPng": "/portfolio-site/covers/building-agent-loop/cover.png",
     "price": 9.99,
     "currency": "USD",
     "stripeLink": "",
@@ -81,7 +81,7 @@ module.exports = [
       "Understanding Bulk Testing: Core Concepts and Real-World Implementations"
     ],
     "hasPdf": true,
-    "coverPng": "/covers/bulk-test-a/cover.png",
+    "coverPng": "/portfolio-site/covers/bulk-test-a/cover.png",
     "price": 9.99,
     "currency": "USD",
     "stripeLink": "",
@@ -97,7 +97,7 @@ module.exports = [
       "Chapter One"
     ],
     "hasPdf": true,
-    "coverPng": "/covers/bulk-test-b/cover.png",
+    "coverPng": "/portfolio-site/covers/bulk-test-b/cover.png",
     "price": 9.99,
     "currency": "USD",
     "stripeLink": "",
@@ -114,7 +114,7 @@ module.exports = [
       "Maintaining and Using Your Compost: Troubleshooting and Applications"
     ],
     "hasPdf": false,
-    "coverPng": "/covers/composting-at-home/cover.png",
+    "coverPng": "/portfolio-site/covers/composting-at-home/cover.png",
     "price": 9.99,
     "currency": "USD",
     "stripeLink": "",
@@ -137,7 +137,7 @@ module.exports = [
       "Sustaining Long-Term Wellness"
     ],
     "hasPdf": true,
-    "coverPng": "/covers/how-to-become-mentally-and-physically-fit-after-40-years/cover.png",
+    "coverPng": "/portfolio-site/covers/how-to-become-mentally-and-physically-fit-after-40-years/cover.png",
     "price": 9.99,
     "currency": "USD",
     "stripeLink": "",
@@ -159,7 +159,7 @@ module.exports = [
       "Staying Positive When Setbacks Keep Coming"
     ],
     "hasPdf": true,
-    "coverPng": "/covers/how-to-become-positive-in-your-difficult-times/cover.png",
+    "coverPng": "/portfolio-site/covers/how-to-become-positive-in-your-difficult-times/cover.png",
     "price": 9.99,
     "currency": "USD",
     "stripeLink": "",
@@ -182,7 +182,7 @@ module.exports = [
       "Scaling Success: Sustaining Growth and Overcoming New Failures"
     ],
     "hasPdf": true,
-    "coverPng": "/covers/how-to-overcome-from-failures-in-life/cover.png",
+    "coverPng": "/portfolio-site/covers/how-to-overcome-from-failures-in-life/cover.png",
     "price": 9.99,
     "currency": "USD",
     "stripeLink": "",
@@ -210,7 +210,7 @@ module.exports = [
       "Getting Started with AGI"
     ],
     "hasPdf": true,
-    "coverPng": "/covers/learning-agi-and-super-agents/cover.png",
+    "coverPng": "/portfolio-site/covers/learning-agi-and-super-agents/cover.png",
     "price": 9.99,
     "currency": "USD",
     "stripeLink": "",
@@ -233,7 +233,7 @@ module.exports = [
       "Day 10: Deployment & Ethical Considerations"
     ],
     "hasPdf": false,
-    "coverPng": "/covers/learning-ai-agents-in-10-days/cover.png",
+    "coverPng": "/portfolio-site/covers/learning-ai-agents-in-10-days/cover.png",
     "price": 9.99,
     "currency": "USD",
     "stripeLink": "",
@@ -257,7 +257,7 @@ module.exports = [
       "Scaling Your Business: From Solo to Agency"
     ],
     "hasPdf": true,
-    "coverPng": "/covers/learning-guide-on-how-to-start-a-real-estate-business-in-karnataka/cover.png",
+    "coverPng": "/portfolio-site/covers/learning-guide-on-how-to-start-a-real-estate-business-in-karnataka/cover.png",
     "price": 9.99,
     "currency": "USD",
     "stripeLink": "",
@@ -279,7 +279,7 @@ module.exports = [
       "10 High-Potential Businesses You Can Start Today"
     ],
     "hasPdf": true,
-    "coverPng": "/covers/learning-guide-on-how-to-start-a-your-own-business-in-india/cover.png",
+    "coverPng": "/portfolio-site/covers/learning-guide-on-how-to-start-a-your-own-business-in-india/cover.png",
     "price": 9.99,
     "currency": "USD",
     "stripeLink": "",
@@ -297,7 +297,7 @@ module.exports = [
       "Chapter Three"
     ],
     "hasPdf": true,
-    "coverPng": "/covers/live-run-test/cover.png",
+    "coverPng": "/portfolio-site/covers/live-run-test/cover.png",
     "price": 9.99,
     "currency": "USD",
     "stripeLink": "",
@@ -320,7 +320,7 @@ module.exports = [
       "Best Practices and Next Steps — Debugging, Testing, Documentation, and Resources to Continue Learning"
     ],
     "hasPdf": true,
-    "coverPng": "/covers/python-for-everyone/cover.png",
+    "coverPng": "/portfolio-site/covers/python-for-everyone/cover.png",
     "price": 9.99,
     "currency": "USD",
     "stripeLink": "",
@@ -343,7 +343,7 @@ module.exports = [
       "Day 8: Deploying and Maintaining Your AI Agent"
     ],
     "hasPdf": false,
-    "coverPng": "/covers/python-in-10-days/cover.png",
+    "coverPng": "/portfolio-site/covers/python-in-10-days/cover.png",
     "price": 9.99,
     "currency": "USD",
     "stripeLink": "",
@@ -361,7 +361,7 @@ module.exports = [
       "Preventing Burnout through Sustainable Focus Practices"
     ],
     "hasPdf": false,
-    "coverPng": "/covers/the-focused-mind/cover.png",
+    "coverPng": "/portfolio-site/covers/the-focused-mind/cover.png",
     "price": 9.99,
     "currency": "USD",
     "stripeLink": "",

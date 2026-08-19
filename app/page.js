@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import books from '../data/books'
 
 export const metadata = {
@@ -83,12 +82,10 @@ export default function Home() {
             {featuredBooks.map((book) => (
               <Link key={book.slug} href={`/books/${book.slug}`} className="book-card group">
                 <div className="relative aspect-[2/3] overflow-hidden bg-slate-100">
-                  <Image
+                  <img
                     src={book.coverPng}
                     alt={book.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute top-3 right-3 bg-brand-600 text-white text-xs font-bold px-3 py-1 rounded-full">
                     ${book.price}
@@ -131,12 +128,10 @@ export default function Home() {
             {allBooks.map((book) => (
               <Link key={book.slug} href={`/books/${book.slug}`} className="book-card group">
                 <div className="relative aspect-[2/3] overflow-hidden bg-slate-100">
-                  <Image
+                  <img
                     src={book.coverPng}
                     alt={book.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute top-2 right-2 bg-brand-600 text-white text-xs font-bold px-2 py-1 rounded-full">
                     ${book.price}
