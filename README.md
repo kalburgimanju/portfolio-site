@@ -10,6 +10,13 @@ Personal branding portfolio and ebook storefront built with **Next.js 14** and *
 - Homepage with hero, stats, featured books grid, and full catalog
 - Per-book pages (`/books/[slug]`) with cover, blurb, chapters, pricing, and buy CTA
 - Order success page (`/success/[slug]`) showing the PDF download link
+- User login/register with localStorage-backed accounts
+- User dashboard showing owned books and reading progress
+- Online book reader for purchased books
+- Admin dashboard (`/admin`) with login `admin` / `admin`
+- Admin overview: total books, sales, monthly revenue
+- Admin purchases list with buyer emails and dates
+- Admin book management: view, edit content, and upload new covers
 - Auto-generated book catalog from `ebook-generator/projects`
 - GitHub Pages deployment via GitHub Actions
 
@@ -82,6 +89,18 @@ Use **Payment Links** — no backend or secret key needed.
 2. Right-click → Share → “Anyone with the link can view”
 3. Copy the link and paste it into `driveLink` in `data/books.js`
 
+## Auth & Admin
+
+This site uses client-side auth backed by `localStorage`.
+
+- **User login/register**: `/login`
+- **User dashboard**: `/dashboard` — shows owned books and reading progress
+- **Online reader**: `/reader/[slug]` — available after purchase
+- **Admin login**: `admin` / `admin`
+- **Admin dashboard**: `/admin` — overview, purchases, book editor
+
+**Note:** Because this is a static site, purchase verification is simulated. In production, replace the localStorage purchase flow with a real payment webhook or backend verification.
+
 ## Deploy to GitHub Pages
 
 This repo includes `.github/workflows/deploy.yml`. Every push to `main` builds the site and deploys it automatically.
@@ -98,18 +117,33 @@ To enable GitHub Pages:
 portfolio-site/
 ├── app/
 │   ├── about/page.js             # About the author
+│   ├── admin/page.js             # Admin dashboard
 │   ├── books/[slug]/page.js      # Individual book page
+│   ├── components/
+│   │   ├── BookActions.js        # Buy button + Stripe checkout
+│   │   └── NavBar.js             # Site navigation
+│   ├── context/
+│   │   └── AuthContext.js        # Auth state + localStorage users
+│   ├── dashboard/page.js         # User dashboard + library
+│   ├── login/page.js             # Login / register
+│   ├── reader/[slug]/page.js     # Online book reader
 │   ├── success/[slug]/page.js    # Order success / download page
 │   ├── layout.js                 # Root layout + metadata
 │   ├── page.js                   # Homepage
+│   ├── providers.js              # Auth provider wrapper
 │   └── globals.css               # Tailwind + custom styles
 ├── data/
 │   └── books.js                  # Auto-generated book catalog
+├── docs/
+│   ├── stripe-setup-checklist.md # Stripe product setup helper
+│   └── drive-setup.md            # Google Drive link setup helper
 ├── public/
 │   └── covers/                   # Book cover images
 ├── scripts/
 │   ├── extract-books.js          # Generate books.js from ebook-generator
-│   └── copy-covers.js            # Copy covers to public/
+│   ├── copy-covers.js            # Copy covers to public/
+│   ├── stripe-setup.js           # Generate Stripe checklist
+│   └── drive-setup.js            # Generate Drive setup guide
 ├── next.config.js                # Static export config
 ├── tailwind.config.js            # Tailwind theme
 └── package.json

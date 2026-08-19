@@ -1,7 +1,6 @@
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import books from '../../../data/books'
-import SuccessPageClient from './SuccessClient'
+import ReaderPageClient from './ReaderClient'
 
 export async function generateStaticParams() {
   return books.map((book) => ({
@@ -11,19 +10,19 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
   const book = books.find((b) => b.slug === params.slug)
-  if (!book) return { title: 'Order Confirmed' }
+  if (!book) return { title: 'Reader' }
 
   return {
-    title: `Order Confirmed — ${book.title}`,
+    title: `Reading — ${book.title}`,
   }
 }
 
-export default function SuccessPage({ params }) {
+export default function ReaderPage({ params }) {
   const book = books.find((b) => b.slug === params.slug)
 
-  if (!book || !book.driveLink) {
+  if (!book) {
     notFound()
   }
 
-  return <SuccessPageClient book={book} />
+  return <ReaderPageClient book={book} />
 }
