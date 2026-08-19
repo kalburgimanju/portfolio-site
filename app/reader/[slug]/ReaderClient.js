@@ -25,7 +25,8 @@ export default function ReaderPageClient() {
     )
     setOwned(hasPurchased)
 
-    if (hasPurchased && book) {
+    const isAdmin = user?.role === 'admin'
+    if ((hasPurchased || isAdmin) && book) {
       setContent(
         `# ${book.title}\n\n` +
           `by ${book.author}\n\n` +
@@ -66,7 +67,8 @@ export default function ReaderPageClient() {
     )
   }
 
-  if (!owned) {
+  const isAdmin = user?.role === 'admin'
+  if (!owned && !isAdmin) {
     return (
       <main className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center py-12 px-4">
         <div className="max-w-md w-full bg-white rounded-2xl shadow-xl border border-slate-100 p-8 text-center">

@@ -199,6 +199,12 @@ export default function AdminPage() {
                     >
                       View
                     </Link>
+                    <Link
+                      href={`/reader/${book.slug}`}
+                      className="text-sm px-3 py-1.5 rounded-lg bg-green-50 text-green-700 hover:bg-green-100"
+                    >
+                      Read
+                    </Link>
                   </div>
                 </div>
               ))}
