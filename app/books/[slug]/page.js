@@ -33,11 +33,12 @@ export default function BookPage({ params }) {
   }
 
   const handleCheckout = () => {
-    if (!book.stripeLink) {
+    const link = book.paymentLink || book.stripeLink
+    if (!link) {
       alert('This book is not yet available for purchase. Please check back later.')
       return
     }
-    window.location.href = book.stripeLink
+    window.location.href = link
   }
 
   return (

@@ -43,7 +43,7 @@ Open `http://localhost:3000`.
 Edit `data/books.js`. For each book you want to sell, fill in:
 
 - `price` — sale price in USD
-- `stripeLink` — Stripe Payment Link URL
+- `paymentLink` — PayPal or other payment provider link
 - `driveLink` — Google Drive share link to the PDF
 
 Example:
@@ -57,7 +57,7 @@ Example:
   "coverPng": "/portfolio-site/covers/learning-ai-agents-in-10-days/cover.png",
   "price": 9.99,
   "currency": "USD",
-  "stripeLink": "https://buy.stripe.com/...",
+  "paymentLink": "https://www.paypal.com/...",
   "driveLink": "https://drive.google.com/file/d/.../view?usp=sharing"
 }
 ```
@@ -73,20 +73,19 @@ npm run build
 
 This refreshes `data/books.js` and copies new covers into `public/covers/`.
 
-## Stripe Setup
+## PayPal Setup
 
-Use **Payment Links** — no backend or secret key needed.
+Use **PayPal payment links/buttons** — no backend or secret key needed.
 
-1. Run `node scripts/stripe-setup.js` to generate `docs/stripe-setup-checklist.md`
-2. For each book in the checklist, go to Stripe Dashboard → Products → Add product
-3. Enter the book title and set the price
-4. Enable one-time payment
-5. Create a **Payment Link**
-6. Copy the payment link URL and paste it into `stripeLink` in `data/books.js`
-7. Optional: set post-payment redirect to `https://kalburgimanju.github.io/portfolio-site/success/<slug>`
-8. After updating links, run `npm run build` and push to deploy
+1. Run `node scripts/paypal-setup.js` to generate `docs/paypal-setup-checklist.md`
+2. For each book in the checklist, create a PayPal payment link/button in your PayPal Business account
+3. Copy the payment link URL and paste it into `paymentLink` in `data/books.js`
+4. Optional: set the return/cancel URLs to:
+   - Return: `https://kalburgimanju.github.io/portfolio-site/success/<slug>`
+   - Cancel: `https://kalburgimanju.github.io/portfolio-site/books/<slug>`
+5. After updating links, run `npm run build` and push to deploy
 
-**Note:** Keep your Stripe secret key private. This site uses Payment Links so no server-side code or secret keys are required.
+**Note:** Keep your PayPal API credentials private. This site uses direct payment links so no server-side integration is required.
 
 ## Google Drive Setup
 
@@ -147,7 +146,7 @@ portfolio-site/
 ├── scripts/
 │   ├── extract-books.js          # Generate books.js from ebook-generator
 │   ├── copy-covers.js            # Copy covers to public/
-│   ├── stripe-setup.js           # Generate Stripe checklist
+│   ├── paypal-setup.js           # Generate PayPal checklist
 │   └── drive-setup.js            # Generate Drive setup guide
 ├── next.config.js                # Static export config
 ├── tailwind.config.js            # Tailwind theme
@@ -158,7 +157,7 @@ portfolio-site/
 
 - [Next.js 14](https://nextjs.org/) — React framework with App Router
 - [Tailwind CSS](https://tailwindcss.com/) — Utility-first styling
-- [Stripe Payment Links](https://stripe.com/docs/payment-links) — Checkout without backend
+- PayPal — Checkout via payment links/buttons
 - GitHub Actions — CI/CD for GitHub Pages
 - Google Drive — PDF hosting and delivery
 

@@ -16,10 +16,24 @@ export default function CartPage() {
   const handleCheckout = () => {
     if (cart.length === 0) return
     const firstItem = cart[0]
-    if (firstItem.stripeLink) {
-      window.location.href = firstItem.stripeLink
-    } else {
-      alert('Stripe payment links are not configured yet.')
+    try {
+      const raw = localStorage.getItem('portfolio_payment_connections')
+      const connections = raw ? JSON.parse(raw) : null
+      const activeKey = connections?.activeProvider || 'paypal'
+      const provider = connections?.providers?.[activeKey]
+      const link = provider?.links?.[firstItem.slug] || provider?.defaultLink || firstItem.paymentLink || firstItem.stripeLink
+      if (link) {
+        window.location.href = link
+      } else {
+        alert(`Payment links are not configured yet for ${activeKey}.`)
+      }
+    } catch (e) {
+      const link = firstItem.paymentLink || firstItem.stripeLink
+      if (link) {
+        window.location.href = link
+      } else {
+        alert('Payment links are not configured yet.')
+      }
     }
   }
 
